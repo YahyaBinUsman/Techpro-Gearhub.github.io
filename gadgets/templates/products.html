@@ -1,0 +1,141 @@
+<!-- gadgets/templates/products.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Add your head content here -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-color:#8A2BE2;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .product-card {
+            width: 18rem;
+            margin: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            border-radius: 15px 15px 0 0;
+        }
+
+        .product-card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+
+        .product-card p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+        }
+
+        .product-card-price {
+            font-size: 18px;
+            color: #2ecc71;
+        }
+
+        .product-card-id {
+            font-size: 14px;
+            color: #95a5a6;
+        }
+
+        /* Specific styles for the navbar */
+        .custom-navbar {
+            background: linear-gradient(45deg, #1a237e, #ff1744);
+            overflow: hidden;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .custom-navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .custom-navbar li {
+            margin-left: 5px;
+        }
+
+        .custom-navbar a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            border: 1px solid #fff;
+            border-radius: 5px;
+        }
+
+        .custom-navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .custom-navbar .last-item {
+            margin-left: auto; 
+        }
+    </style>
+</head>
+
+<body>
+   
+    <nav class="custom-navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'products' %}">Products</a></li>
+            <li><a href="{% url 'view_cart' %}">View Cart</a></li>
+            <li><a href="{% url 'contact_form' %}">Contact Us</a></li>
+            <li class="last-item"><a href="{% url 'password_protected' %}">Add product</a></li>
+        </ul>
+    </nav>
+
+    <h1>Products</h1>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-3">
+                <div class="card product-card mb-4">
+                    <img src="{% static 'product_images/' %}{{ product.image_name }}" class="card-img-top" >
+                    <div class="card-body">
+                        <h2 class="card-title">{{ product.name }}</h2>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+                        <form method="post" class="add-to-cart-form" action="{% url 'add_to_cart' product_id=product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

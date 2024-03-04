@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .navbar {
+            background: linear-gradient(45deg, #1a237e, #ff1744);
+            overflow: hidden;
+            padding-top: 20px;
+            padding-bottom: 20px; 
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex; 
+        }
+
+        .navbar li {
+            margin-left: 5px; 
+        }
+
+        .navbar a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            border: 1px solid #fff;
+            border-radius: 5px; 
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .navbar .last-item {
+            margin-left: auto; 
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'login' %}">Login </a></li>
+        <li><a href="{% url 'products' %}">Products</a></li>
+        <li><a href="{% url 'view_cart' %}">View Cart</a></li>
+        <li><a href="{% url 'contact_form' %}">Contact Us</a></li>
+        <li class="last-item"><a href="{% url 'password_protected' %}">Add product</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>

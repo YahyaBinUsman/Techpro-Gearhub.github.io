@@ -1,0 +1,127 @@
+<!-- contact/templates/contact/contact_form.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    
+   <style>
+body {
+    background-color:#8A2BE2;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px; /* Increased width */
+    margin: 50px auto;
+}
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Increased padding */
+    margin-bottom: 20px;
+}
+
+.contact-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-title h2 {
+    color: #007bff;
+}
+
+.contact-title hr {
+    border: 1px solid #007bff;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.contact-inputs {
+    width: 100%;
+            padding: 20px; /* Increase padding for larger height */
+            border: 2px solid; /* Remove the border */
+            border-radius: 10px;
+            box-sizing: border-box;
+            color: #2c502f;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            transition: background 0.3s;
+}
+
+.contact-inputs:focus {
+    border-color: #2980b9;
+    background-color: #ecf0f1;
+}
+
+textarea {
+    width: calc(100% - 20px); /* Adjusted width */
+    padding: 15px; /* Increased padding */
+    resize: vertical; /* Allow vertical resize only */
+    margin-bottom: 20px; /* Increased margin */
+}
+
+button {
+    display: block;
+    width: calc(100% - 20px); /* Adjusted width */
+    padding: 15px; /* Increased padding */
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+    border-radius: 15px;
+}
+
+button:hover {
+    background-color: #00b37d;
+}
+.placeholder{
+    display: block;
+            margin-bottom: 12px;
+            color: #ecf0f1;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+}
+   </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+            <div class="contact-title">
+                <h2>Get in touch</h2>
+                <hr />
+            </div>
+            <input type="hidden" name="access_key" value="669f4345-f337-4267-afa0-c9dc9aa5cb9e" />
+            <label for="name" class="placeholder">Name :</label>
+            <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required />
+            <br>
+            <br>
+            <label for="email" class="placeholder">Email :</label>
+            <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required />
+            <br>
+            <br>
+            <label for="message" class="placeholder">Message :</label>
+            <textarea name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
+            <button type="submit">Submit </button>
+        </form>
+        <div class="contact-right">
+            <img src="" alt="" />
+        </div>
+    </div>
+</body>
+
+</html>

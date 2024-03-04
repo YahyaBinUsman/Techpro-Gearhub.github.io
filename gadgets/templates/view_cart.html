@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <!-- Add your head content here -->
+
+    <style>
+        body {
+            background-color:#8A2BE2;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+        }
+
+      
+        .card {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: inline;
+        }
+
+        button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #c82333;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .btn-success {
+            display: block;
+            margin: 20px auto;
+            background-color: green;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-success:hover {
+            background-color: blue;
+        }
+        .list{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="card">
+        <!-- Display cart items and total bill -->
+        <h2>Your Cart:</h2>
+        <ul>
+            {% for item in cart_items %}
+            <div class="list">
+                <li>
+                    {{ item.product.name }} - ${{ item.product.price }} x {{ item.quantity }}
+                    <form method="post" action="{% url 'remove_from_cart' item.id %}" style="display: inline;">
+                        {% csrf_token %}<br>
+                        <button type="submit">Remove</button>
+                    </form>
+                </li>
+            </div>
+            {% endfor %}
+        </ul>
+        <p>Total Bill: ${{ total_bill }}</p>
+        <a href="{% url 'checkout' %}" class="btn btn-success">Go to Checkout</a>
+    </div>
+</body>
+
+</html>
