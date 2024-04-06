@@ -56,7 +56,7 @@ def product_list(request):
 # Home View
 def home(request):
     products = Product.objects.all()
-    return render(request, 'home.html', {'products': products})
+    return render(request, 'index.html', {'products': products})
 
 # Login View
 def login_view(request):
@@ -81,7 +81,7 @@ def password_protected_view(request):
         form = PasswordForm(request.POST)
         if form.is_valid():
             entered_password = form.cleaned_data['password']
-            stored_password = '*wk2dnh^57mwus9'
+            stored_password = '123'
 
             if entered_password == stored_password:
                 return redirect('add_product')

@@ -113,7 +113,6 @@
             <li><a href="{% url 'products' %}">Products</a></li>
             <li><a href="{% url 'view_cart' %}">View Cart</a></li>
             <li><a href="{% url 'contact_form' %}">Contact Us</a></li>
-            <li class="last-item"><a href="{% url 'password_protected' %}">Add product</a></li>
         </ul>
     </nav>
 
@@ -122,7 +121,7 @@
         {% for product in products %}
             <div class="col-md-3">
                 <div class="card product-card mb-4">
-                    <img src="{% static 'product_images/' %}{{ product.image_name }}" class="card-img-top" >
+                    <img src="{{ product.image.url }}" class="card-img-top">
                     <div class="card-body">
                         <h2 class="card-title">{{ product.name }}</h2>
                         <p class="card-text">{{ product.description }}</p>

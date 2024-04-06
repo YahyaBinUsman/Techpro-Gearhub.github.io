@@ -1,7 +1,3 @@
-
-
-# Register your models here.
-# gadgets/admin.py
 from django.contrib import admin
 from .models import Product
 

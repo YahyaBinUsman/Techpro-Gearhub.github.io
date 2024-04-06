@@ -27,6 +27,14 @@ DEBUG = True
 LOGIN_REDIRECT_URL = 'home'
 
 ALLOWED_HOSTS = []
+import os
+
+# Base directory for media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL to access media files
+MEDIA_URL = '/media/'
+
 
 
 # Application definition
