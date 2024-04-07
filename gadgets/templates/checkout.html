@@ -2,129 +2,176 @@
 <html lang="en">
 
 <head>
-    <!-- Add your head content here -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <!-- Add your head content here -->
-
     <style>
+        :root {
+            --cart-background-color: #8A2BE2;
+            --cart-card-background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            --cart-button-color: #e74c3c;
+            --cart-button-hover-color: #c0392b;
+            --cart-success-color: #2ecc71;
+            --cart-success-hover-color: #27ae60;
+            --cart-text-color: #ecf0f1;
+            --cart-accent-color: #3498db;
+            --cart-font-family: 'Arial', sans-serif;
+            --cart-form-background: linear-gradient(145deg, #535c68, #353b48);
+            --cart-button-gradient: linear-gradient(145deg, #e67e22, #d35400);
+            --cart-input-focus: #1abc9c;
+            --neon-color: #000000;
+            --form-field-bg-color: #535c68; /* New color for form field background */
+        }
+        
         body {
-            background-color:#8A2BE2;
+            background-color: var(--cart-background-color);
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            color: #fff;
+            font-family: var(--cart-font-family);
+            color: var(--cart-text-color);
+            line-height: 1.6;
         }
-
-        .card {
+        
+        .container {
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background: var(--cart-card-background);
+            color: var(--cart-text-color);
         }
-
-        h2 {
+        
+        .container h2 {
             text-align: center;
-            color: #007bff;
+            color: var(--cart-accent-color);
         }
-
-        ul {
+        
+        .container ul {
             list-style-type: none;
             padding: 0;
         }
-
-        li {
+        
+        .container li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 15px;
+            background: var(--cart-form-background);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-
-        p {
-            text-align: center;
+        
+        .container .cart-product-name {
             font-size: 18px;
             font-weight: bold;
-            margin-top: 20px;
         }
-
-        form {
-            margin-top: 20px;
+        
+        .container .cart-product-price {
+            font-size: 16px;
+            font-style: italic;
         }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ecf0f1;
-            font-weight: bold;
+        
+        .container .cart-form-futuristic {
+            display: flex;
+            align-items: center;
         }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 2px solid #3498db;
-            border-radius: 5px;
-            color: #2c3e50;
-            background-color: rgba(255, 255, 255, 0.9);
-            transition: border-color 0.3s, background-color 0.3s;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus,
-        input[type="email"]:focus,
-        textarea:focus {
-            border-color: #2980b9;
-            background-color: #ecf0f1;
-        }
-
-        .btn-primary,
-        .btn-success {
-            display: block;
-            width: 100%;
-            padding: 12px;
+        
+        .btn, .cart-btn, .cart-remove-btn {
+            background: var(--cart-button-gradient);
+            color: var(--cart-text-color);
             border: none;
             border-radius: 5px;
+            padding: 5px 10px; /* Adjusted padding */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover, .cart-btn:hover, .cart-remove-btn:hover {
+            background-color: var(--cart-button-hover-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            display: block;
+            margin: 20px auto;
+            background-color: var(--cart-success-color);
+            color: var(--cart-text-color);
+            border: none;
+            border-radius: 5px;
+            padding: 14px 20px; /* Adjusted padding */
             font-size: 18px;
             text-align: center;
+            text-decoration: none;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            color: #fff;
-        }
-
+        
         .btn-success:hover {
-            background-color: #218838;
+            background-color: var(--cart-success-hover-color);
+            transform: translateY(-2px);
+        }
+        
+        .container p {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        .container:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Styling for form fields */
+        .container input[type="text"] {
+            background-color: var(--form-field-bg-color); /* Use custom background color */
+            color: var(--cart-text-color);
+            border: 2px solid var(--neon-color); /* neon border */
+            border-radius: 5px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: calc(100% - 16px); /* adjust width */
+            height: 50px; /* increase height */
+        }
+
+        .container input[type="text"]:focus {
+            outline: none;
+            border-color: var(--cart-input-focus);
+        }
+
+        /* Style for submit button */
+        .container button[type="submit"] {
+            width: 100%; /* make button width 100% */
+            margin-top: 10px; /* add margin */
+            height: 60px; /* increase height */
+        }
+
+        @media (max-width: 767px) {
+            .container li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cart-remove-btn {
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
     {% include 'navbar.html' %}
-    <div class="card">
+
+    <div class="container">
         <!-- Display cart items and total bill -->
         <h2>Your Cart:</h2>
         <ul>
             {% for item in cart_items %}
-                <li>
-                    {{ item.product.name }} - ${{ item.product.price }} x {{ item.quantity }}
-                </li>
+            <li>{{ item.product.name }} - ${{ item.product.price }} x {{ item.quantity }}</li>
             {% endfor %}
         </ul>
         <p>Total Bill: ${{ total_bill }}</p>
@@ -132,13 +179,29 @@
         <!-- Checkout form -->
         <form method="post" action="{% url 'checkout' %}">
             {% csrf_token %}
-            {{ form.as_p }}
+            <label for="address">Address:</label>
+            <input type="text" name="address" id="address" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary">Complete Checkout</button>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" class="form-control" required>
+
+            <label for="state">State:</label>
+            <input type="text" name="state" id="state" class="form-control" required>
+
+            <label for="zip_code">ZIP Code:</label>
+            <input type="text" name="zip_code" id="zip_code" class="form-control" required>
+
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" name="phone_number" id="phone_number" class="form-control" required>
+
+            <label for="country">Country:</label>
+            <input type="text" name="country" id="country" class="form-control" required>
+
+            <button type="submit" class="btn btn-success">Complete Checkout</button>
         </form>
 
         <a href="{% url 'order_confirmation' %}" class="btn btn-success">View Receipt</a>
     </div>
-
 </body>
+
 </html>

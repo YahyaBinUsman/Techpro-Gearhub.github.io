@@ -17,10 +17,12 @@
             margin: 0;
             padding: 0;
             display: flex; 
+            justify-content: center; /* Center items horizontally */
+            flex-wrap: wrap; /* Wrap items to next line if there's no space */
         }
 
         .navbar li {
-            margin-left: 5px; 
+            margin: 0 15px; 
         }
 
         .navbar a {
@@ -46,6 +48,16 @@
             padding: 20px;
             text-align: center;
         }
+
+        /* Media query for smaller devices */
+        @media screen and (max-width: 600px) {
+            .navbar a {
+                padding: 10px; /* Reduce padding for smaller screens */
+            }
+            .navbar li {
+                margin: 0 10px 10px ; 
+            }
+        }
     </style>
 </head>
 <body>
@@ -53,7 +65,7 @@
 <nav class="navbar">
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'login' %}">Login </a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'products' %}">Products</a></li>
         <li><a href="{% url 'view_cart' %}">View Cart</a></li>
         <li><a href="{% url 'contact_form' %}">Contact Us</a></li>

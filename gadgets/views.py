@@ -117,13 +117,14 @@ def add_to_cart(request, product_id):
     return redirect('products')
 
 # View Cart View
+# View Cart View
 def view_cart(request):
     # Retrieve the user's cart and related items
     user_cart = get_object_or_404(Cart, user=request.user)
     user_cart_items = user_cart.cartitem_set.all()
 
     # Calculate total bill
-    total_bill = sum(item.product.price for item in user_cart_items)
+    total_bill = sum(item.total_price for item in user_cart_items)
 
     return render(request, 'view_cart.html', {'cart_items': user_cart_items, 'total_bill': total_bill})
 

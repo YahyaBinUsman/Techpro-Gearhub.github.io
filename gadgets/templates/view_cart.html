@@ -5,71 +5,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart</title>
-    <!-- Add your head content here -->
-
     <style>
+        :root {
+            --cart-background-color: #8A2BE2;
+            --cart-card-background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            --cart-button-color: #e74c3c;
+            --cart-button-hover-color: #c0392b;
+            --cart-success-color: #2ecc71;
+            --cart-success-hover-color: #27ae60;
+            --cart-text-color: #ecf0f1;
+            --cart-accent-color: #3498db;
+            --cart-font-family: 'Arial', sans-serif;
+            --cart-form-background: linear-gradient(145deg, #535c68, #353b48);
+            --cart-button-gradient: linear-gradient(145deg, #e67e22, #d35400);
+            --cart-input-focus: #1abc9c;
+        }
+        
         body {
-            background-color:#8A2BE2;
+            background-color: var(--cart-background-color);
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            color: #fff;
+            font-family: var(--cart-font-family);
+            color: var(--cart-text-color);
+            line-height: 1.6;
         }
-
-      
-        .card {
+        
+        .cart-card {
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background: var(--cart-card-background);
+            color: var(--cart-text-color);
         }
-
-        h2 {
+        
+        .cart-card h2 {
             text-align: center;
-            color: #007bff;
+            color: var(--cart-accent-color);
         }
-
-        ul {
+        
+        .cart-card ul {
             list-style-type: none;
             padding: 0;
         }
-
-        li {
+        
+        .cart-card li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 15px;
+            background: var(--cart-form-background);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-
-        form {
-            display: inline;
-        }
-
-        button {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #c82333;
-        }
-
-        p {
-            text-align: center;
+        
+        .cart-product-name {
             font-size: 18px;
             font-weight: bold;
-            margin-top: 20px;
         }
-
-        .btn-success {
+        
+        .cart-product-price {
+            font-size: 16px;
+            font-style: italic;
+        }
+        
+        .cart-form-futuristic {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-button, .cart-btn, .cart-remove-btn {
+            background: var(--cart-button-gradient);
+            color: var(--cart-text-color);
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px; /* Adjusted padding */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cart-button:hover, .cart-btn:hover, .cart-remove-btn:hover {
+            background-color: var(--cart-button-hover-color);
+            transform: translateY(-2px);
+        }
+        
+        .cart-btn-success {
             display: block;
             margin: 20px auto;
-            background-color: green;
-            color: #fff;
+            background-color: var(--cart-success-color);
+            color: var(--cart-text-color);
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
@@ -77,38 +104,59 @@
             text-align: center;
             text-decoration: none;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .cart-btn-success:hover {
+            background-color: var(--cart-success-hover-color);
+            transform: translateY(-2px);
+        }
+        
+        .cart-p {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        .cart-list:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .btn-success:hover {
-            background-color: blue;
-        }
-        .list{
-            text-align: center;
+        @media (max-width: 767px) {
+            .cart-card li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cart-remove-btn {
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
     {% include 'navbar.html' %}
-    <div class="card">
+    <div class="cart-card">
         <!-- Display cart items and total bill -->
         <h2>Your Cart:</h2>
         <ul>
             {% for item in cart_items %}
-            <div class="list">
+            <div class="cart-list">
                 <li>
-                    {{ item.product.name }} - ${{ item.product.price }} x {{ item.quantity }}
-                    <form method="post" action="{% url 'remove_from_cart' item.id %}" style="display: inline;">
-                        {% csrf_token %}<br>
-                        <button type="submit">Remove</button>
+                    <span class="cart-product-name">{{ item.product.name }}</span> - 
+                    <span class="cart-product-price">${{ item.product.price }}</span> x {{ item.quantity }}
+                    <form method="post" action="{% url 'remove_from_cart' item.id %}" class="cart-form-futuristic">
+                        {% csrf_token %}
+                        <button type="submit" class="cart-remove-btn">Remove</button>
                     </form>
                 </li>
             </div>
             {% endfor %}
         </ul>
-        <p>Total Bill: ${{ total_bill }}</p>
-        <a href="{% url 'checkout' %}" class="btn btn-success">Go to Checkout</a>
+        <p class="cart-p">Total Bill: ${{ total_bill }}</p>
+        <a href="{% url 'checkout' %}" class="cart-btn cart-btn-success">Go to Checkout</a>
     </div>
 </body>
 

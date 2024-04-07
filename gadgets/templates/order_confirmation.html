@@ -1,115 +1,130 @@
-<!-- gadgets/templates/order_confirmation.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Add your head content here -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation</title>
-    <!-- Add your head content here -->
-
     <style>
-       body {
-        background-color:#8A2BE2;
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            color: #fff;
+            background-color:#8A2BE2;
         }
 
-        .card {
-            max-width: 600px;
+        .container {
+            max-width:fit-content;
             margin: 20px auto;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.1);
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
         }
 
         h2 {
-            text-align: center;
-            color: #007bff;
+            color: #333;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
 
-        h3 {
-            color: #007bff;
+        .card {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 15px;
-        }
-
-        p {
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
+        .items {
             margin-top: 20px;
         }
 
-        .btn-success {
-            display: block;
-            margin: 20px auto;
-            background-color: #28a745;
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2ecc71;
             color: #fff;
+            text-decoration: none;
             border: none;
             border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 18px;
-            text-align: center;
-            text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        .btn-success:hover {
-            background-color: #218838;
+        .btn:hover {
+            background-color: #27ae60;
         }
-        .items{
-             text-align: center;
+
+        /* Background color for form fields */
+        input[type="text"],
+        input[type="number"],
+        select {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #3498db;
         }
     </style>
 </head>
 
 <body>
     {% include 'navbar.html' %}
-    <div class="card">
-        <h2>Order Confirmation</h2>
-        {% if order %}
-            <p>Order ID: {{ order.id }}</p>
-            <p>Order Date: {{ order.created_at }}</p>
+    <div class="container">
+        <div class="card">
+            <h2>Order Confirmation</h2>
+            {% if order %}
+            <p><strong>Order ID:</strong> {{ order.id }}</p>
+            <p><strong>Order Date:</strong> {{ order.created_at }}</p>
             <hr>
-            <!-- Display other order details as needed -->
-        <div class="items">
-            <h3>Ordered Items:</h3>
-            <ul>
-                {% for order_item in order_items %}
+            <div class="items">
+                <h3>Ordered Items:</h3>
+                <ul>
+                    {% for order_item in order_items %}
                     <li>{{ order_item.product.name }} - ${{ order_item.product.price }} x {{ order_item.quantity }} - Total: ${{ order_item.total_price }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <hr>
-        <p>Total Bill: ${{ total_bill }}</p>
-
-            <!-- Display complete checkout form information -->
+                    {% endfor %}
+                </ul>
+            </div>
             <hr>
-            <p>Delivery Address: {{ order.address }}</p>
-            <p>City: {{ order.city }}</p>
-            <p>State: {{ order.state }}</p>
-            <p>ZIP Code: {{ order.zip_code }}</p>
-            <p>Phone Number: {{ order.phone_number }}</p>
-            <p>Country: {{ order.country }}</p>
+            <p><strong>Total Bill:</strong> ${{ total_bill }}</p>
             <hr>
-
-            <a href="{% url 'home' %}" class="btn btn-success">Back to Home</a>
-        {% else %}
+            <p><strong>Delivery Address:</strong> {{ order.address }}</p>
+            <p><strong>City:</strong> {{ order.city }}</p>
+            <p><strong>State:</strong> {{ order.state }}</p>
+            <p><strong>ZIP Code:</strong> {{ order.zip_code }}</p>
+            <p><strong>Phone Number:</strong> {{ order.phone_number }}</p>
+            <p><strong>Country:</strong> {{ order.country }}</p>
+            <hr>
+            <a href="{% url 'home' %}" class="btn">Back to Home</a>
+            {% else %}
             <p>No order found.</p>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 </body>
 

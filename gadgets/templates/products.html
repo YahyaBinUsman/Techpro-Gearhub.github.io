@@ -41,6 +41,7 @@
 
         .product-card img {
             border-radius: 15px 15px 0 0;
+            height: 200px;
         }
 
         .product-card h2 {
@@ -66,24 +67,7 @@
         }
 
         /* Specific styles for the navbar */
-        .custom-navbar {
-            background: linear-gradient(45deg, #1a237e, #ff1744);
-            overflow: hidden;
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-
-        .custom-navbar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        .custom-navbar li {
-            margin-left: 5px;
-        }
-
+       
         .custom-navbar a {
             display: block;
             color: white;
@@ -98,23 +82,14 @@
             background-color: #ddd;
             color: black;
         }
-        .custom-navbar .last-item {
-            margin-left: auto; 
-        }
+        
     </style>
 </head>
 
 <body>
    
-    <nav class="custom-navbar">
-        <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'products' %}">Products</a></li>
-            <li><a href="{% url 'view_cart' %}">View Cart</a></li>
-            <li><a href="{% url 'contact_form' %}">Contact Us</a></li>
-        </ul>
-    </nav>
+    {% include 'navbar.html' %}
+
 
     <h1>Products</h1>
     <div class="row">
