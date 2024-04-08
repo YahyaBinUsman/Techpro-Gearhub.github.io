@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Project Showcase</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: gold;
+            padding-top: 50px;
+        }
+
+        .carousel-item img {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Django Project Showcase</h1>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" id="carousel-inner">
+                <!-- Images will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+   <!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Make sure to place your script after jQuery and Bootstrap JS are loaded
+    $(document).ready(function() {
+        // Dynamically add carousel items
+        var carouselInner = document.getElementById('carousel-inner');
+        var numImages = 12; // Total number of images
+        var currentIndex = 75; // Starting index
+        var interval = 2000; // Interval in milliseconds
+    
+        function addCarouselItems() {
+            carouselInner.innerHTML = ''; // Clear existing items
+            for (var i = 0; i < numImages; i++) {
+                var imageIndex = (currentIndex + i) % numImages + 75; // Ensure index stays within range
+                var isActive = i === 0 ? 'active' : ''; // Set first image as active
+                var imgElement = '<div class="carousel-item ' + isActive + '">' +
+                                    '<img src="website images/Screenshot (' + imageIndex + ').png" class="d-block w-100" alt="Screenshot ' + imageIndex + '">' +
+                                '</div>';
+                carouselInner.innerHTML += imgElement;
+            }
+            currentIndex++; // Move to the next set of images
+        }
+    
+        // Initial call
+        addCarouselItems();
+    
+        // Auto move the carousel every 3 seconds
+        setInterval(addCarouselItems, interval);
+    });
+    
+</script>
+</body>
+</html>
